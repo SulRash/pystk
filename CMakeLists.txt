@@ -70,7 +70,7 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/lib/zlib")
 include_directories("${PROJECT_SOURCE_DIR}/lib/zlib")
 
 set(ZLIB_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/lib/zlib" "${PROJECT_BINARY_DIR}/lib/zlib/")
-set(ZLIB_LIBRARY zlibstatic)
+set(ZLIB_LIBRARY "${PROJECT_BINARY_DIR}/lib/zlib/libzlibstatic.a")
 
 set(SKIP_INSTALL_ALL TRUE)
 set(PNG_STATIC TRUE CACHE BOOL "Build static lib")
