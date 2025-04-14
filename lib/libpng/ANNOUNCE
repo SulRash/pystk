@@ -1,61 +1,46 @@
+libpng 1.6.47 - February 18, 2025
+=================================
 
-Libpng 1.5.28 - December 29, 2016
+This is a public release of libpng, intended for use in production code.
 
-This is a public release of libpng, intended for use in production codes.
 
-Files available for download:
+Files available for download
+----------------------------
 
-Source files with LF line endings (for Unix/Linux) and with a
-"configure" script
+Source files with LF line endings (for Unix/Linux):
 
-   libpng-1.5.28.tar.xz (LZMA-compressed, recommended)
-   libpng-1.5.28.tar.gz
+ * libpng-1.6.47.tar.xz (LZMA-compressed, recommended)
+ * libpng-1.6.47.tar.gz (deflate-compressed)
 
-Source files with CRLF line endings (for Windows), without the
-"configure" script
+Source files with CRLF line endings (for Windows):
 
-   lpng1528.7z  (LZMA-compressed, recommended)
-   lpng1528.zip
+ * lpng1647.7z (LZMA-compressed, recommended)
+ * lpng1647.zip (deflate-compressed)
 
 Other information:
 
-   libpng-1.5.28-README.txt
-   libpng-1.5.28-LICENSE.txt
-   libpng-1.5.28-*.asc (armored detached GPG signatures)
+ * README.md
+ * LICENSE.md
+ * AUTHORS.md
+ * TRADEMARK.md
 
-Changes since the last public release (1.5.27):
 
-  Merged with current libpng16 gregbook, pngvalid.c, pngtest.c, pngminim,
-    pngminus
-  Added "Common linking failures" section to INSTALL.
-  Fixed undefined behavior in png_push_save_buffer(). Do not call
-    memcpy() with a null source, even if count is zero (Leon Scroggins III).
-  Merge contrib/pngminim/*/makefile with libpng-1.6.24
-  Minor editing of INSTALL, (whitespace, added copyright line)
-  Removed the use of a macro containing the pre-processor 'defined'
-    operator.  It is unclear whether this is valid; a macro that
-    "generates" 'defined' is not permitted, but the use of the word
-    "generates" within the C90 standard seems to imply more than simple
-    substitution of an expression itself containing a well-formed defined
-    operation.
-  Previously the pngtrans.c code always resulted in an unsigned arithmetic
-    overflow. This is well defined but produces errors from clang with the
-    option to detect unsigned overflow. As the expression only gets
-    evaluated once per row in this version of libpng it is easier just
-    to rewrite it.
-  The previous version of png.c produced a signed overflow as a result of
-    both the "& 0xffff" on the most significant bits of a negative argument;
-    this converted (-1) into 65535 which resulted in a subsequent overflow.
-    Since signed overflow is undefined in C90 the code has been modified to
-    correctly calculate a signed result.  This requires changing the 'hi'
-    result parameter to a signed value.
-  Fixed a potential null pointer dereference in png_set_text_2() (bug report
-    and patch by Patrick Keshishian).
+Changes from version 1.6.46 to version 1.6.47
+---------------------------------------------
 
-Send comments/corrections/commendations to png-mng-implement at lists.sf.net
-(subscription required; visit
+ * Modified the behaviour of colorspace chunks in order to adhere
+   to the new precedence rules formulated in the latest draft of
+   the PNG Specification.
+   (Contributed by John Bowler)
+ * Fixed a latent bug in `png_write_iCCP`.
+   This would have been a read-beyond-end-of-malloc vulnerability,
+   introduced early in the libpng-1.6.0 development, yet (fortunately!)
+   it was inaccessible before the above-mentioned modification of the
+   colorspace precedence rules, due to pre-existing colorspace checks.
+   (Reported by Bob Friesenhahn; fixed by John Bowler)
+
+
+Send comments/corrections/commendations to png-mng-implement at lists.sf.net.
+Subscription is required; visit
 https://lists.sourceforge.net/lists/listinfo/png-mng-implement
-to subscribe)
-or to glennrp at users.sourceforge.net
-
-Glenn R-P
+to subscribe.
