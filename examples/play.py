@@ -4,7 +4,7 @@ import argparse
 import pystk
 from time import time
 import numpy as np
-from . import gui
+import gui
 
 
 def action_dict(action):
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     race.step()
 
     uis = [gui.UI([gui.VT[x] for x in args.visualization]) for i in range(args.num_player)]
-
+    print(uis)
     state = pystk.WorldState()
     state.update()
     t0 = time()
